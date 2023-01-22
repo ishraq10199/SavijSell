@@ -1,0 +1,29 @@
+﻿@model Ishraq.SavijSell.Ui.ViewModels.ProductsViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">SavijSell</h1>
+    <hr />
+
+    <div class="row row-cols-3 row-cols-md-3 row-cols-sm-1 g-4">
+        @foreach (var product in Model.Products)
+        {
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="@product.Image" class="card-img-top" alt="purse-picture">
+                    <div class="card-body">
+                        <!-- Note:  Html.ActionLink ( visible text, controller Action Name, controller Name, routevalue:optional) -->
+
+                        <h5 class="card-title"> @Html.ActionLink(@product.Title, "ProductDetails", "Products", new {id=product.Id})</h5>
+                        <div>@string.Format("{0:C2}", product.Price)</div>
+                        <div>@product.Location</div>
+                    </div>
+                </div>
+            </div>
+        }
+        
+
+    </div>
+</div>
