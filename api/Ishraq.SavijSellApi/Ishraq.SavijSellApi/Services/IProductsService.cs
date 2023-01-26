@@ -4,8 +4,8 @@ namespace Ishraq.SavijSellApi.Services
 {
     public interface IProductsService
     {
-        List<Product> GetProducts();
-        Product GetProduct(string id);
+        Task<List<Product>> GetProducts();
+        Task<Product> GetProduct(string id);
 
     }
 }

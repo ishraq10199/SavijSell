@@ -5,6 +5,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<IUserManagementRepository, UserManagementRepository>();
+builder.Services.AddSingleton<IUserManagementService, UserManagementService>();
 builder.Services.AddSingleton<IProductsRepository, ProductsRepository>();
 builder.Services.AddSingleton<IProductsService, ProductsService>();
 

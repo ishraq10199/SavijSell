@@ -1,5 +1,5 @@
 ﻿using Ishraq.SavijSellApi.Services;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ishraq.SavijSellApi.Controllers
@@ -16,17 +16,19 @@ namespace Ishraq.SavijSellApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        [Authorize]
+        public async Task<IActionResult> Get()
         {
-            var products = _productsService.GetProducts();
+            var products = await _productsService.GetProducts();
             return Ok(products);
         }
 
         [HttpGet]
         [Route("{id}")]
-        public IActionResult GetProduct(string id)
+        [Authorize]
+        public async Task<IActionResult> GetProduct(string id)
         {
-            var product = _productsService.GetProduct(id);
+            var product = await _productsService.GetProduct(id);
             return Ok(product);
         }
     }

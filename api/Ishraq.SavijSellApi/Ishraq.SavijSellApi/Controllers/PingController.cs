@@ -1,5 +1,4 @@
-﻿using Ishraq.SavijSellApi.Models;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ishraq.SavijSellApi.Controllers
@@ -14,5 +13,13 @@ namespace Ishraq.SavijSellApi.Controllers
         {
             return Ok(new {Response="Pong"});
         }
-    }
+
+		[HttpGet]
+		[Route("/protectedping")]
+        [Authorize]
+		public IActionResult GetProtectedPing()
+		{
+			return Ok(new { Response = "Protected Pong" });
+		}
+	}
 }
