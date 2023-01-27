@@ -1,3 +1,4 @@
+using Ishraq.SavijSellApi.Middleware;
 using Ishraq.SavijSellApi.Models;
 using Ishraq.SavijSellApi.Repositories;
 using Ishraq.SavijSellApi.Services;
@@ -14,14 +15,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
-
-
 var dbSettingsSection = builder.Configuration.GetSection("DatabaseSettings");
 var cryptoSettingsSection = builder.Configuration.GetSection("CryptoSettings");
+var adminSettingsSection = builder.Configuration.GetSection("AdminSettings");
 
 builder.Services.Configure<DatabaseSettings>(dbSettingsSection);
 builder.Services.Configure<CryptoSettings>(cryptoSettingsSection);
+builder.Services.Configure<AdminSettings>(adminSettingsSection);
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddJwtBearer(options =>
@@ -55,6 +55,8 @@ if (app.Environment.IsDevelopment())
 }
 
 // app.UseHttpsRedirection();
+
+app.UseApiKey();
 
 app.UseAuthentication();
 

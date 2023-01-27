@@ -1,4 +1,5 @@
-﻿using Ishraq.SavijSell.Ui.Services;
+﻿using Ishraq.SavijSell.Ui.Models;
+using Ishraq.SavijSell.Ui.Services;
 using Ishraq.SavijSell.Ui.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,9 +45,16 @@ namespace Ishraq.SavijSell.Ui.Controllers
 		[ActionName("LoginPostAsync")]
 		public async Task<IActionResult> LoginPostAsync(LoginViewModel viewModel)
 		{
-			await _userManagementService.Login(viewModel.Email, viewModel.Password);
-			//await Task.CompletedTask;
-			return RedirectToAction("ConfirmationReminder");
+			var tokenRespose = await _userManagementService.Login(viewModel.Email, viewModel.Password);
+			Response.Cookies.Append(
+				Constants.XAccessToken,
+				tokenRespose.Token,
+				new CookieOptions{
+					HttpOnly = true,
+					SameSite = SameSiteMode.Strict
+				}
+			);
+			return RedirectToAction("Index", "Products");
 		}
 	}
 }

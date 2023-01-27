@@ -1,4 +1,5 @@
 ﻿using System.Web.Helpers;
+using Ishraq.SavijSell.Ui.Models;
 using Ishraq.SavijSell.Ui.Repositories;
 
 namespace Ishraq.SavijSell.Ui.Services
@@ -12,7 +13,7 @@ namespace Ishraq.SavijSell.Ui.Services
 			_userManagementRepository = userManagementRepository;
 		}
 
-		public async Task<string> Login(string email, string password)
+		public async Task<TokenResponse> Login(string email, string password)
 		{
 			return await _userManagementRepository.Login(email, password);
 		}

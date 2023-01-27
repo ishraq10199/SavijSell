@@ -1,21 +1,30 @@
 ﻿using Ishraq.SavijSell.Ui.Models;
 using Flurl;
 using Flurl.Http;
+using Flurl.Http.Configuration;
 
 namespace Ishraq.SavijSell.Ui.Repositories
 {
-    public class ProductsRepository:IProductsRepository
+    public class ProductsRepository: RepositoryBase, IProductsRepository
     {
+        
 
-        public async Task<List<Product>> GetProducts()
+		public ProductsRepository(IFlurlClientFactory flurlClientFactory, 
+                                  IHttpContextAccessor httpContextAccessor):
+                                    base(flurlClientFactory, httpContextAccessor)
+		{}
+
+		public async Task<List<Product>> GetProducts()
         {
             // API Call here
-            var products = await "http://localhost:5176".AppendPathSegment("/api/Products").GetJsonAsync<List<Product>>();
+            var products = await _flurlClient.Request("/api/Products")
+                                    .GetJsonAsync<List<Product>>();
             return products;
         }
         public async Task<Product> GetProductById(int id)
         {
-            var product = await "http://localhost:5176".AppendPathSegment($"/api/Products/{id}").GetJsonAsync<Product>();
+            var product = await _flurlClient.Request($"/api/Products/{id}")
+                                    .GetJsonAsync<Product>();
             return product;
 
         }

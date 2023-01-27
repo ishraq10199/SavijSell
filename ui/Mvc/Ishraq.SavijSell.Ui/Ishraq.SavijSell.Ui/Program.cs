@@ -1,3 +1,4 @@
+using Flurl.Http.Configuration;
 using Ishraq.SavijSell.Ui.Repositories;
 using Ishraq.SavijSell.Ui.Services;
 
@@ -9,6 +10,8 @@ builder.Services.AddSingleton<IUserManagementRepository, UserManagementRepositor
 builder.Services.AddSingleton<IUserManagementService, UserManagementService>();
 builder.Services.AddSingleton<IProductsRepository, ProductsRepository>();
 builder.Services.AddSingleton<IProductsService, ProductsService>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddSingleton<IFlurlClientFactory, PerBaseUrlFlurlClientFactory>();
 
 var app = builder.Build();
 
@@ -29,6 +32,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Products}/{action=Index}/{id?}");
+    pattern: "{controller=UserManagement}/{action=Index}/{id?}");
 
 app.Run();

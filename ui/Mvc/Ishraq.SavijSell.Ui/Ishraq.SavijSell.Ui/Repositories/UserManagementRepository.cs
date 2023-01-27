@@ -6,14 +6,14 @@ namespace Ishraq.SavijSell.Ui.Repositories
 {
 	public class UserManagementRepository : IUserManagementRepository
 	{
-		public async Task<string> Login(string email, string password)
+		public async Task<TokenResponse> Login(string email, string password)
 		{
 			var userLogin = new UserLogin {
 				Email = email,
 				Password = password
 			};
 
-			var token = await "http://localhost:5176".AppendPathSegment("api/token").PostJsonAsync(userLogin).ReceiveJson<string>();
+			var token = await "http://localhost:5176".AppendPathSegment("api/token").PostJsonAsync(userLogin).ReceiveJson<TokenResponse>();
 
 			return token;
 		}
