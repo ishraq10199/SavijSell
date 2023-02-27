@@ -19,7 +19,7 @@
 |+ This is NOT an <em>actual</em> project that I want to show off 🥴<br>
 |+ Used a YT channel ([Noble Cause Software Development](https://www.youtube.com/channel/UCiQ6kayf9LYL7IIhlORydpg)) for the guide 🙌<br>
 |+ Intentionally used the awful commit messages 💀<br>
-
+<br>
 ```
 Will probably do a standalone project with .NET later... Webassembly is looking real nice fr fr 👀
 ```
